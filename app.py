@@ -31,4 +31,6 @@ def testpost():
      dictToReturn = {'result':output_seq}
      return jsonify(dictToReturn)
 
+if __name__ == '__main__':
+   app.run(debug = True)
      
