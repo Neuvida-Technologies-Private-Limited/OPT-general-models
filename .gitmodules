@@ -1,0 +1,3 @@
+[submodule "opt-2.7b"]
+	path = opt-2.7b
+	url = https://huggingface.co/facebook/opt-2.7b/tree/main
