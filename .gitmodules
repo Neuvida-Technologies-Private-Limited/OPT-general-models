@@ -1,0 +1,3 @@
+[submodule "opt-1.3b"]
+	path = opt-1.3b
+	url = https://huggingface.co/facebook/opt-1.3b
