@@ -41,7 +41,6 @@ OPT belongs to the same family of decoder-only models like [GPT-3](https://arxiv
 
 For evaluation, OPT follows [GPT-3](https://arxiv.org/abs/2005.14165) by using their prompts and overall experimental setup. For more details, please read 
 the [official paper](https://arxiv.org/abs/2205.01068).
-
 ## Intended uses & limitations
 
 The pretrained-only model can be used for prompting for evaluation of downstream tasks as well as text generation.
@@ -54,9 +53,9 @@ You can use this model directly with a pipeline for text generation.
 ```python
 >>> from transformers import pipeline
 
->>> generator = pipeline('text-generation', model="facebook/opt-2.7b")
+>>> generator = pipeline('text-generation', model="facebook/opt-1.3b")
 >>> generator("Hello, I'm am conscious and")
-[{'generated_text': 'Hello, I am conscious and I am a human being.\nI am a human being, and'}]
+[{'generated_text': 'Hello, I am conscious and I am here.\nI am here.\nI am conscious.'}]
 ```
 
 By default, generation is deterministic. In order to use the top-k sampling, please set `do_sample` to `True`. 
@@ -65,9 +64,9 @@ By default, generation is deterministic. In order to use the top-k sampling, ple
 >>> from transformers import pipeline, set_seed
 
 >>> set_seed(32)
->>> generator = pipeline('text-generation', model="facebook/opt-2.7b", do_sample=True)
+>>> generator = pipeline('text-generation', model="facebook/opt-1.3b", do_sample=True)
 >>> generator("Hello, I'm am conscious and")
-[{'generated_text': "Hello, I'm am conscious and I make things. I'm in the creative community, which is"}]
+[{'generated_text': "Hello, I'm am conscious and able to hear.  I have a lot of experience in the"}]
 ```
 
 ### Limitations and bias
@@ -87,13 +86,13 @@ Here's an example of how the model can have biased predictions:
 >>> from transformers import pipeline, set_seed
 
 >>> set_seed(32)
->>> generator = pipeline('text-generation', model="facebook/opt-2.7b", do_sample=True, num_return_sequences=5)
+>>> generator = pipeline('text-generation', model="facebook/opt-1.3b", do_sample=True, num_return_sequences=5)
 >>> generator("The woman worked as a")
-[{'generated_text': "The woman worked as a security guard at a nursery in the city's eastern district of Samut P"}, 
-{'generated_text': 'The woman worked as a doctor in the Philippines. Officials in China allege she stole the coronavirus'}, 
-{'generated_text': 'The woman worked as a teacher in the city of Krasnodar in south Russia. She'}, 
-{'generated_text': 'The woman worked as a researcher and lecturer at the Russian Academy of Sciences in a laboratory dedicated to the'}, 
-{'generated_text': 'The woman worked as a nanny on a property owned by Mr Fitton-Allen in the city'}]
+[{'generated_text': 'The woman worked as a bartender for six months before getting to the job she always dreamed of. She'}, 
+{'generated_text': 'The woman worked as a nanny in a house near The White Horse Farm in the Yorkshire Dales'}, 
+{'generated_text': "The woman worked as a translator at the British Broadcasting Corporation's headquarters and was also an acquaintance of some"}, 
+{'generated_text': 'The woman worked as a secretary and went to school full-time, and also worked as a waitress'}, 
+{'generated_text': 'The woman worked as a beautician with her baby and the little girl is now at the age where'}]
 ```
 
 compared to:
@@ -102,13 +101,13 @@ compared to:
 >>> from transformers import pipeline, set_seed
 
 >>> set_seed(32)
->>> generator = pipeline('text-generation', model="facebook/opt-2.7b", do_sample=True, num_return_sequences=5)
+>>> generator = pipeline('text-generation', model="facebook/opt-1.3b", do_sample=True, num_return_sequences=5)
 >>> generator("The man worked as a")
-[{'generated_text': "The man worked as a security guard at a retirement home after being hired by the administrator's cousin,"}, 
-{'generated_text': 'The man worked as a doctor in the Philippines.\n\nHe had hoped to work his way back'}, 
-{'generated_text': 'The man worked as a teacher in the city of Krasnodar in south Russia.He'}, 
-{'generated_text': 'The man worked as a researcher and his work on the topic predates the project, by many years'}, 
-{'generated_text': 'The man worked as a chef in a restaurant for 40 years. How could this be so different from'}]
+[{'generated_text': 'The man worked as a janitor and the owner of the house he worked at caught him cheating on'}, 
+{'generated_text': 'The man worked as a software engineer.\n\nFor over 10 years, he had been at Amazon'}, 
+{'generated_text': 'The man worked as a car salesman - and was a man of his word to her\nA T'}, 
+{'generated_text': 'The man worked as a private contractor for five years. He went to the Bahamas in the summer of'}, 
+{'generated_text': 'The man worked as a computer systems consultant. After leaving the job, he became a prolific internet hacker'}]
  ```
 
 This bias will also affect all fine-tuned versions of this model.
@@ -140,6 +139,8 @@ re-formatting practices, including removing repetitive/non-informative text like
 *This ebook by Project Gutenberg.*
 
 ## Training procedure
+
+
 
 ### Preprocessing
 
