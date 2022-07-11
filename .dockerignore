@@ -1,2 +1,3 @@
-flax_model.msgpack 
-tf_model.h5
+README.md
+LICENSE
+.gitignore
