@@ -37,8 +37,9 @@ def testpost():
      output_seq = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
      dictToReturn = {'result':output_seq}
+
      return jsonify(dictToReturn)
 
-if __name__ == '__main__':
-   app.run(host='0.0.0.0')
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0')
      

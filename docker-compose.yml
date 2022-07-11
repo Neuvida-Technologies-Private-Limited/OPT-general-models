@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-    api:
-      build: .
-      volumes:
-        - .:/api
-      ports:
-        - "8080:8080"
-
+  flask_app:
+    container_name: flask_app
+    restart: always
+    build: ./flask_app
+    ports:
+      - "8000:8000"
+    command: gunicorn -w 3 -b 0.0.0.0:8000 -t 360 wsgi:server

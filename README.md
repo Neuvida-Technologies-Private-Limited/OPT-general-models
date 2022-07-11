@@ -7,3 +7,4 @@ and returns generated content as result.
     ```
         docker-compose up
     ```
+
