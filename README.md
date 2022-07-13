@@ -11,7 +11,7 @@ and returns generated content as result.
 ## Steps to deploy model on ec2
 1. Login into the server(See if SSH is allowed or not, and username)
    ```
-   ssh -i yamak-dev-docker.pem ubuntu@13.234.48.251
+   ssh -i yamak-dev-docker.pem ubuntu@3.111.45.63
    ```
 
 2. Update the server
@@ -24,13 +24,13 @@ and returns generated content as result.
     ```
     cd ~/.ssh
     ssh-keygen -o -t rsa -C "rishabhb932@gmail.com"
-    cat id_rsa.pub
    ```
-5. Copy the publick key
+5. Copy the publick key and it to github
     ```
     cat id_rsa.pub
+    cd
     ```
-6. Clone the repo
+6. Clone the repo 
     ```
     git clone <git url>
     ```
@@ -38,7 +38,7 @@ and returns generated content as result.
     ```
     sudo apt-get install ca-certificates curl gnupg lsb-release
     
-   sudo mkdir -p /etc/apt/keyrings
+    sudo mkdir -p /etc/apt/keyrings
 
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
