@@ -11,7 +11,7 @@ and returns generated content as result.
 ## Steps to deploy model on ec2
 1. Login into the server(See if SSH is allowed or not, and username)
    ```
-   ssh -i yamak-dev-docker.pem ubuntu@52.66.201.6
+   ssh -i yamak-dev-docker.pem ubuntu@3.110.147.92
    ```
 
 2. Update the server
