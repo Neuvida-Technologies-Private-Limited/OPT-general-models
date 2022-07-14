@@ -18,16 +18,17 @@ def testpost():
      temp = input_json['temp']
      t_p = input_json['top_p']
      t_k = input_json['top_k']
+     max_len = input_json['max_len']
 
      encoded_prompt = tokenizer.encode(prompt_text, add_special_tokens=False, return_tensors="pt")
      encoded_prompt = encoded_prompt.to(device)
      model.to(device)
 
      outputs = model.generate(encoded_prompt,
-                        max_length=64+len(encoded_prompt[0]), 
+                        max_length=max_len+len(encoded_prompt[0]),
                         do_sample=True,
-                        temperature = temp, 
-                        top_p=t_p, 
+                        temperature = temp,
+                        top_p=t_p,
                         top_k=t_k,
                         repetition_penalty=1.2,
                         #  num_beams=5, 
