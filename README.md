@@ -15,11 +15,13 @@ and returns generated content as result.
    ```
 
 2. Update the server
+     ```
     sudo apt-get update
-
+     ```
 3. Install git
+     ```
     sudo apt install git
-
+     ```
 4. Create public/private keys and add public key them to github
     ```
     cd ~/.ssh
