@@ -6,6 +6,11 @@ and returns generated content as result.
 ## Command to run the app via docker
     ```
         docker-compose up
+        
+        OR
+        
+        sudo docker run -p 8000:8000 --gpus all <image-name> 
+        [Note: w/o docker-compose.Run cmd inside flask_app]
     ```
 
 ## Steps to deploy model on ec2
