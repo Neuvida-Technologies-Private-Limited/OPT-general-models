@@ -10,7 +10,6 @@ import torch
 app = Flask(__name__)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(device)
 
 @app.route('/OPT', methods=["POST"])
 def testpost():
@@ -39,7 +38,7 @@ def testpost():
                         )
      output_seq = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-     dictToReturn = {'result':output_seq}
+     dictToReturn = {'inference-on':device,'result':output_seq}
 
      return jsonify(dictToReturn)
 
