@@ -14,11 +14,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 @app.route('/OPT', methods=["POST"])
 def testpost():
      input_json = request.get_json(force=True) 
-     prompt_text = input_json['prompt']
-     temp = input_json['temp']
-     t_p = input_json['top_p']
-     t_k = input_json['top_k']
-     max_len = input_json['max_len']
+     prompt_text =str(input_json['prompt'])
+     temp = float(input_json['temp'])
+     t_p = float(input_json['top_p'])
+     t_k = int(input_json['top_k'])
+     max_len = int(input_json['max_len'])
 
      encoded_prompt = tokenizer.encode(prompt_text, add_special_tokens=False, return_tensors="pt")
      encoded_prompt = encoded_prompt.to(device)
