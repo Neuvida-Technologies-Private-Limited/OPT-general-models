@@ -1,4 +1,4 @@
-FROM python:3.9.2-slim-buster
+FROM nvidia/cuda:11.7.0-runtime-ubuntu20.04
 
 WORKDIR usr/src/flask_app
 
