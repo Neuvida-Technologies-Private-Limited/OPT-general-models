@@ -10,6 +10,7 @@ import torch
 app = Flask(__name__)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
 
 @app.route('/OPT', methods=["POST"])
 def testpost():
