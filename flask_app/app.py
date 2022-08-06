@@ -1,13 +1,18 @@
 """
-Simple API which queries OPT LM with a prompt and returns 
+Simple API which queries META-OPT LM with a prompt and returns 
 next set of tokens.
 """
 from flask import Flask, request, jsonify
-from query_model import model, tokenizer
+from transformers import GPT2Tokenizer, OPTForCausalLM
 # using time module
 import torch
 
 app = Flask(__name__)
+
+
+model = OPTForCausalLM.from_pretrained("facebook/opt-1.3b")
+tokenizer = GPT2Tokenizer.from_pretrained("facebook/opt-1.3b")
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 curr_device = torch.cuda.current_device()
@@ -26,7 +31,9 @@ def testpost():
      encoded_prompt = encoded_prompt.to(device)
      model.to(device)
 
-     outputs = model.generate(encoded_prompt,
+     with torch.no_grad():
+          
+          outputs = model.generate(encoded_prompt,
                         max_length=max_len+len(encoded_prompt[0]),
                         do_sample=True,
                         temperature = temp,
@@ -38,6 +45,7 @@ def testpost():
                         # num_return_sequences=1, 
                         # early_stopping=True
                         )
+     
      output_seq = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
      dictToReturn = {'inference-on':device_name,'result':output_seq}
