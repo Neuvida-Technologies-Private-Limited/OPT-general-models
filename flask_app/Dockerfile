@@ -1,6 +1,6 @@
 FROM nvidia/cuda:11.7.0-base-ubuntu20.04
 
-WORKDIR usr/src/flask_app
+WORKDIR /usr/src/flask_app
 
 RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y curl
 RUN apt-get install unzip
