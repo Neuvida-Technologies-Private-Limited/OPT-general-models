@@ -25,11 +25,10 @@ def testpost():
      t_k = int(input_json['top_k'])
      max_len = int(input_json['max_len'])
 
+     torch.cuda.empty_cache()
      encoded_prompt = tokenizer.encode(prompt_text, add_special_tokens=False, return_tensors="pt")
      encoded_prompt = encoded_prompt.to(device)
      model.to(device)
-
-     torch.cuda.empty_cache()
 
      with torch.no_grad():
           
