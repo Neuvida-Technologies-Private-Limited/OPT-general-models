@@ -1,11 +1,8 @@
-FROM nvidia/cuda:11.7.0-base-ubuntu20.04
+FROM python:3.9.2-slim-buster
 
 WORKDIR /usr/src/flask_app
 
 RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y curl
-RUN apt-get install unzip
-RUN apt-get -y install python3
-RUN apt-get -y install python3-pip
 
 COPY . .
 
