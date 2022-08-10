@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 from transformers import GPT2Tokenizer, OPTForCausalLM
 # using time module
 import torch
+from numba import cuda
 
 app = Flask(__name__)
 
@@ -16,7 +17,16 @@ tokenizer = GPT2Tokenizer.from_pretrained("facebook/opt-1.3b")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 curr_device = torch.cuda.current_device()
-device_name = torch.cuda.get_device_name(curr_device)
+
+def free_gpu_cache():                  
+
+    torch.cuda.empty_cache()
+
+    cuda.select_device(curr_device)
+    cuda.close()
+    cuda.select_device(curr_device)
+    device_name = torch.cuda.get_device_name(curr_device)
+    return device_name
 
 @app.route('/OPT', methods=["POST"])
 def testpost():
@@ -30,6 +40,8 @@ def testpost():
      encoded_prompt = tokenizer.encode(prompt_text, add_special_tokens=False, return_tensors="pt")
      encoded_prompt = encoded_prompt.to(device)
      model.to(device)
+
+     gpu_name = free_gpu_cache()
 
      with torch.no_grad():
           
@@ -48,7 +60,7 @@ def testpost():
      
      output_seq = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-     dictToReturn = {'inference-on':device_name,'result':output_seq}
+     dictToReturn = {'inference-on':gpu_name,'result':output_seq}
 
      return jsonify(dictToReturn)
 
