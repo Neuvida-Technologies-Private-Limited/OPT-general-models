@@ -10,4 +10,4 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["gunicorn","-w","3","--threads","2","-b","0.0.0.0:8000","-t","360","wsgi:app"]
+CMD ["gunicorn","-w","2","--threads","2","-b","0.0.0.0:8000","-t","360","wsgi:app"]

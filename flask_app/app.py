@@ -12,10 +12,10 @@ app = Flask(__name__)
 model = OPTForCausalLM.from_pretrained("facebook/opt-1.3b")
 tokenizer = GPT2Tokenizer.from_pretrained("facebook/opt-1.3b")
 
-device = torch.device("cpu")
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# curr_device = torch.cuda.current_device()
-# device_name = torch.cuda.get_device_name(curr_device)
+#device = torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+curr_device = torch.cuda.current_device()
+device_name = torch.cuda.get_device_name(curr_device)
 
 @app.route('/OPT', methods=["POST"])
 def testpost():
@@ -26,7 +26,9 @@ def testpost():
      t_k = int(input_json['top_k'])
      max_len = int(input_json['max_len'])
 
-     #torch.cuda.empty_cache()
+     length = len(prompt_text)
+
+     torch.cuda.empty_cache()
      encoded_prompt = tokenizer.encode(prompt_text, add_special_tokens=False, return_tensors="pt")
      encoded_prompt = encoded_prompt.to(device)
      model.to(device)
@@ -48,7 +50,7 @@ def testpost():
      
      output_seq = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-     dictToReturn = {'result':output_seq}
+     dictToReturn = {'inference-on':device_name,'result':output_seq[length:]}
 
      return jsonify(dictToReturn)
 
