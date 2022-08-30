@@ -17,6 +17,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 curr_device = torch.cuda.current_device()
 device_name = torch.cuda.get_device_name(curr_device)
 
+@app.route('/', methods=["GET"])
+def testing():
+     return "success",200
+
+
 @app.route('/OPT', methods=["POST"])
 def testpost():
      input_json = request.get_json(force=True) 
